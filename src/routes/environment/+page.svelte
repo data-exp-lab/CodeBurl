@@ -1,4 +1,4 @@
-<div class="w-full grid grid-cols-6 md:grid-cols-6 gap-4"> 
+<div class="container w-full grid grid-cols-6 md:grid-cols-6 gap-4"> 
     <div class="m-4 p-4">
         <button type="button" class="btn variant-filled">YAML Upload</button>
     </div>
