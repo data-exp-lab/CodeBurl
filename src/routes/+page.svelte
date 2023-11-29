@@ -1,4 +1,48 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
+<script lang="ts">
+	import { writable } from 'svelte/store';
+	import {
+		SvelteFlow,
+		Background,
+		Controls,
+		MiniMap,
+		type Node,
+		type NodeTypes
+	} from '@xyflow/svelte';
+
+	import '@xyflow/svelte/dist/style.css';
+
+	import { nodes as initialNodes, edges as initialEdges } from './nodes-and-edges';
+
+	import CustomNode from './CustomNode.svelte';
+	import Message from './Message.svelte';
+
+	const nodes = writable<Node[]>(initialNodes);
+	const edges = writable(initialEdges);
+
+	const nodeTypes: NodeTypes = {
+		custom: CustomNode,
+		message: Message
+	};
+
+	// we are using a bit of a shortcut here to adjust the edge type
+	// this could also be done with a custom edge for example
+	$: {
+		$edges.forEach((edge) => {
+			if (edge.sourceHandle) {
+				const edgeType = $nodes.find((node) => node.type === 'custom')?.data.selects[
+					edge.sourceHandle
+				];
+				edge.type = edgeType;
+			}
+		});
+		$edges = $edges;
+	}
+
+	function handleScriptUpload(event) {
+		// Implementation goes here
+	}
+</script>
 
 <div class="container">
 	<!-- Configuration Section -->
@@ -45,7 +89,7 @@
 					<input type="text" placeholder="Enter Languages" class="text-area" />
 				</div>
 			</div>
-			
+
 			<label class="btn btn-sm variant-ghost-surface" for="node-add">
 				Add Node to Workspace
 				<input type="file" id="node-add" style="display: none;" />
@@ -54,27 +98,28 @@
 	</div>
 
 	<!-- Workspace Section -->
-	<div class="right-column">
-		<!-- Top Right: Workspace Section -->
-		<div class="space-y-3 flex flex-col">
-			<h6 class="section-title"><span>Workspace</span></h6>
-			<div class="workspace-section" />
+	<div class="space-y-3 flex flex-col">
+		<h6 class="section-title"><span>Workspace</span></h6>
+		<div class="workspace-section" style:height="600px">
+			<SvelteFlow {nodes} {edges} {nodeTypes} fitView>
+				<Background patternColor="#aaa" gap={16} />
+				<Controls />
+				<MiniMap zoomable pannable height={120} />
+			</SvelteFlow>
+		</div>
+	</div>
 
-			<div class="flex">
-				<!-- Bottom Right: Terminal and Visualization Sections -->
-				<div>
-					<h6 class="section-title"><span>Terminal Output</span></h6>
-					<div class="terminal-section">
-						<!-- Terminal output content goes here -->
-					</div>
-				</div>
-				<div>
-					<h6 class="section-title"><span>Visualization</span></h6>
-					<div class="vis-section">
-						<!-- Terminal output content goes here -->
-					</div>
-				</div>
-			</div>
+	<!-- Workspace Section -->
+	<div class="space-y-2 flex flex-col">
+		<div>
+			<h6 class="section-title"><span>Terminal Output</span></h6>
+			<div class="terminal-section"></div>
+		</div>
+		<br>
+		<br>
+		<div>
+			<h6 class="section-title"><span>Visualization</span></h6>
+			<div class="terminal-section"></div>
 		</div>
 	</div>
 </div>
@@ -82,7 +127,7 @@
 <style lang="postcss">
 	.section-title {
 		margin-left: 30px;
-		margin-bottom:10px;
+		margin-bottom: 10px;
 	}
 
 	.configuration-section {
@@ -90,7 +135,8 @@
 		padding: 20px;
 		margin-left: 20px;
 		border-radius: 10px;
-		height:600px;
+		height: 600px;
+		width:400px;
 	}
 
 	.workspace-section {
@@ -98,9 +144,8 @@
 		padding: 20px;
 		margin-left: 30px;
 		border-radius: 10px;
-		width: 800px;
+		width: 900px;
 		height: 350px;
-	
 	}
 	.terminal-section {
 		border: 1px solid #818bb7;
@@ -108,7 +153,7 @@
 		margin-left: 30px;
 		border-radius: 10px;
 		width: 380px;
-		height: 200px;
+		height: 255px;
 	}
 
 	.vis-section {
@@ -141,7 +186,7 @@
 	.btn {
 		background-color: transparent;
 		cursor: pointer;
-		margin-bottom:10px;
+		margin-bottom: 10px;
 	}
 	.btn:hover {
 		background-color: #b7c0c0;
