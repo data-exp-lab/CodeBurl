@@ -1,22 +1,15 @@
-# Burl
+# CodeBurl
+Enhancing Multi-Language Development in Scientific Visualization Through Visual Programming
 
-## Developing
+## Running Locally
+### pre-requisite
+We suggest setting up the environment using `conda`, and it's important to make sure that `npm` is installed prior to executing the scripts that follow.
 
-Install dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+#### Developing
+Afterwards, you can install dependencies with `npm install` (or `pnpm install` or `yarn`), and start a development server:
 
 ```bash
-# start the server and open the app in a browser
+npm update
+npm install
 npm run dev -- --open
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
