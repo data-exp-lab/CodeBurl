@@ -56,18 +56,6 @@ export const nodes: Node[] = [
     position: { x: 400, y: 325 },
     sourcePosition: Position.Right,
     targetPosition: Position.Left
-  },
-  {
-    id: '7',
-    type: 'message',
-    class: 'annotation',
-    draggable: false,
-    selectable: false,
-    data: {
-      label: 'message'
-    },
-    position: { x: 150, y: 400 },
-    style: 'width: 280px; padding: 15px;'
   }
 ];
 
