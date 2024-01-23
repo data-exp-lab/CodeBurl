@@ -39,6 +39,7 @@
   "type": "module",
   "dependencies": {
     "@floating-ui/dom": "1.5.3",
+    "@threlte/core": "^7.0.12",
     "@xyflow/svelte": "^0.0.28"
   }
 }

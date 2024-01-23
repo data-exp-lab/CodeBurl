@@ -6,7 +6,7 @@
 	}
 	//workspace section
 	import { SvelteFlowProvider } from '@xyflow/svelte';
-	import Flow from './Flow.svelte';
+	import Workspace from './workspace.svelte';
 </script>
 
 <div class="container">
@@ -65,7 +65,7 @@
 		<h6 class="section-title"><span>Workspace</span></h6>
 		<div class="workspace-section" style:height="600px">
 			<SvelteFlowProvider>
-				<Flow />
+				<Workspace />
 			</SvelteFlowProvider>
 		</div>
 	</div>

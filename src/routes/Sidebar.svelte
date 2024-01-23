@@ -13,11 +13,11 @@
     <div class="label">Drag these nodes to the pane below.</div>
     <div class="nodes-container">
       <div
-        class="input-node node"
-        on:dragstart={(event) => onDragStart(event, 'input')}
+        class="custom-node node"
+        on:dragstart={(event) => onDragStart(event, 'custom')}
         draggable={true}
       >
-        Input Node
+        Custom Node
       </div>
       <div
         class="default-node node"

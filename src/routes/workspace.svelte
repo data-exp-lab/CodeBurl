@@ -1,5 +1,5 @@
 <script lang="ts">
-	
+	import { writable } from 'svelte/store';
 	import {
 		SvelteFlow,
 		Controls,
@@ -7,14 +7,16 @@
 		BackgroundVariant,
 		MiniMap,
 		useSvelteFlow,
-		type Node
+		type Node,
+		type Edge
 	} from '@xyflow/svelte';
-	import Sidebar from './Sidebar.svelte';
-
+	import './tailwind.css';
 	import '@xyflow/svelte/dist/style.css';
 
-	import { nodes, edges} from './node_edges';
+	import { initialNodes, initialEdges } from './node_edges';
 
+	// sidebar
+	import Sidebar from './sidebar.svelte';
 	const { screenToFlowPosition } = useSvelteFlow();
 	const onDragOver = (event: DragEvent) => {
 		event.preventDefault();
@@ -49,13 +51,23 @@
 		$nodes.push(newNode);
 		$nodes = $nodes;
 	};
+
+	// custom node
+	const nodes = writable<Node[]>(initialNodes);
+	const edges = writable<Edge[]>(initialEdges);
+
+	import CustomNode from './nodes/CustomNode.svelte';
+
+	const nodeTypes = {
+		custom: CustomNode,
+	};
 </script>
 
 <main>
-	<SvelteFlow {nodes} {edges} fitView on:dragover={onDragOver} on:drop={onDrop}>
+	<SvelteFlow {nodes} {nodeTypes} {edges} fitView on:dragover={onDragOver} on:drop={onDrop}>
 		<Controls />
 		<Background variant={BackgroundVariant.Dots} />
-		<MiniMap height={80} width={90}/>
+		<MiniMap height={80} width={90} />
 	</SvelteFlow>
 	<Sidebar />
 </main>
