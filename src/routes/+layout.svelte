@@ -6,6 +6,14 @@
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+	
+	function handleYAMLUpload(event) {
+		// Implementation goes here
+	};
+	
+	function handleVisualSchemaUpload(event) {
+		// Implementation goes here
+	}
 </script>
 
 <!-- App Shell -->
@@ -14,8 +22,9 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<strong class="text-xl">Jupyterlab NodeEditor </strong>
-				<span class="thin-small-text"> - A Graphical Interface for Multi-Language Operations</span>
+				<strong class="text-xl">CodeBurl </strong>
+				<span class="thin-small-text"> &nbsp Enhancing Multi-Language Development in Scientific
+					Visualization Through Visual Programming</span>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<label class="btn btn-sm variant-ghost-surface" for="yaml-upload">
@@ -23,12 +32,12 @@
 					<input type="file" id="yaml-upload" style="display: none;" on:change={handleYAMLUpload} />
 				</label>
 				<label class="btn btn-sm variant-ghost-surface" for="recipe-upload">
-					Recipe Upload
+					Visual Schema Upload
 					<input
 						type="file"
 						id="recipe-upload"
 						style="display: none;"
-						on:change={handleRecipeUpload}
+						on:change={handleVisualSchemaUpload}
 					/>
 				</label>
 			</svelte:fragment>
