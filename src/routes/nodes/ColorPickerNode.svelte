@@ -4,6 +4,7 @@
 	import type { NodeData } from '../node_edges';
 
 	type $$Props = NodeProps;
+	$$restProps;
 	export let data: NodeData;
 	const { label, flowState } = data;
 

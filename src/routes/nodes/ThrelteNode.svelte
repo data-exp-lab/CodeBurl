@@ -7,6 +7,7 @@
   
     type $$Props = NodeProps;
     export let data: NodeData;
+    $$restProps;
     const { label, flowState } = data;
   </script>
   

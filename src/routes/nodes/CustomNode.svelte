@@ -21,6 +21,7 @@
 	];
 
 	type $$Props = NodeProps;
+	$$restProps;
 
 	export let data: $$Props['data'];
 	export let id: $$Props['id'];
