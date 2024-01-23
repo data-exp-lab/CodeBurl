@@ -57,9 +57,18 @@
 	const edges = writable<Edge[]>(initialEdges);
 
 	import CustomNode from './nodes/CustomNode.svelte';
+	import ColorPickerNode from './nodes/ColorPickerNode.svelte';
+	import SliderNode from './nodes/SliderNode.svelte';
+	import ThrelteNode from './nodes/ThrelteNode.svelte';
+	import SwitcherNode from './nodes/SwitcherNode.svelte';
+
 
 	const nodeTypes = {
 		custom: CustomNode,
+		colorpicker: ColorPickerNode,
+		slider: SliderNode,
+		hero: ThrelteNode,
+		switcher: SwitcherNode
 	};
 </script>
 
