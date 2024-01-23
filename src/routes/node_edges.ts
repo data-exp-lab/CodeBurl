@@ -1,6 +1,6 @@
-import { Position, MarkerType, type Node } from '@xyflow/svelte';
-
-export const nodes: Node[] = [
+import { writable } from 'svelte/store';
+import { Position, MarkerType } from '@xyflow/svelte';
+export const nodes = writable([
   {
     id: '1',
     type: 'input',
@@ -57,9 +57,9 @@ export const nodes: Node[] = [
     sourcePosition: Position.Right,
     targetPosition: Position.Left
   }
-];
+]);
 
-export const edges = [
+export const edges = writable([
   { id: 'e1-2', source: '1', target: '2', label: 'this is an edge label' },
   { id: 'e1-3', source: '1', target: '3', animated: true },
   {
@@ -88,4 +88,4 @@ export const edges = [
       type: MarkerType.ArrowClosed
     }
   }
-];
+]);

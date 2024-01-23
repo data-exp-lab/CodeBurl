@@ -4,42 +4,9 @@
 	function handleScriptUpload(event) {
 		// Implementation goes here
 	}
-
 	//workspace section
-	import { writable } from 'svelte/store';
-	import {
-		SvelteFlow,
-		Background,
-		Controls,
-		MiniMap,
-		type Node,
-		type NodeTypes
-	} from '@xyflow/svelte';
-
-	import '@xyflow/svelte/dist/style.css';
-
-	import { nodes as initialNodes, edges as initialEdges } from './node_edges';
-
-	import CustomNode from './CustomNode.svelte';
-
-	const nodes = writable<Node[]>(initialNodes);
-	const edges = writable(initialEdges);
-
-	const nodeTypes: NodeTypes = {
-		custom: CustomNode
-	};
-
-	$: {
-		$edges.forEach((edge) => {
-			if (edge.sourceHandle) {
-				const edgeType = $nodes.find((node) => node.type === 'custom')?.data.selects[
-					edge.sourceHandle
-				];
-				edge.type = edgeType;
-			}
-		});
-		$edges = $edges;
-	}
+	import { SvelteFlowProvider } from '@xyflow/svelte';
+	import Flow from './Flow.svelte';
 </script>
 
 <div class="container">
@@ -97,11 +64,9 @@
 	<div class="space-y-3 flex flex-col">
 		<h6 class="section-title"><span>Workspace</span></h6>
 		<div class="workspace-section" style:height="600px">
-			<SvelteFlow {nodes} {edges} {nodeTypes} fitView>
-				<Background patternColor="#aaa" gap={16} />
-				<Controls />
-				<MiniMap zoomable pannable height={80} width={100} />
-			</SvelteFlow>
+			<SvelteFlowProvider>
+				<Flow />
+			</SvelteFlowProvider>
 		</div>
 	</div>
 
